@@ -15,6 +15,7 @@ The simple_shell program is used to execute similar commands to bash shell, with
 
 ##	Authors
 Joshua Onwuka Uchechukwu | [Github](https://github.com/Joshuauche)
+
 Asad Ullah | [Github](https://github.com/underdogs180)
 
 
