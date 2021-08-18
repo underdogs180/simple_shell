@@ -12,19 +12,20 @@
 extern char **environ;
 
 /**
- *  * struct environment - struct for a linked list of environment variables
- *   * @key: key name for variable
- *    * @value: value of variable
- *     * @next: pointer to next variable
- *      */
+ * struct environment - struct for a linked list of environment variables
+ * @key: key name for variable
+ * @value: value of variable
+ * @next: pointer to next variable
+ */
 typedef struct environment
 {
-		char *key;
-			char *value;
-				struct environment *next;
+	char *key;
+	char *value;
+	struct environment *next;
 } env_t;
 
 /**
+<<<<<<< HEAD
  *  * struct variables - variables
  *   * @av: command line arguments
  *    * @buffer: buffer of command
@@ -50,6 +51,16 @@ typedef struct builtins
 {
 		char *name;
 			void (*f)(vars_t *);
+=======
+ * struct builtins - struct for the builtin functions
+ * @name: name of builtin command
+ * @f: function for corresponding builtin
+ */
+typedef struct builtins
+{
+	char *name;
+	void (*f)();
+>>>>>>> 85067b36bee2446ac4e7d3140bf37ee123387144
 } builtins_t;
 
 char *make_key(char *str);
@@ -78,5 +89,6 @@ void check_for_path(vars_t *vars);
 int path_execute(char *command, vars_t *vars);
 env_t *find_path(env_t *head);
 int execute_cwd(vars_t *vars);
+
 
 #endif /* _SHELL_H_ */
