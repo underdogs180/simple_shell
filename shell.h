@@ -16,40 +16,40 @@ extern char **environ;
  *   * @key: key name for variable
  *    * @value: value of variable
  *     * @next: pointer to next variable
- *      */
+ */
 typedef struct environment
 {
-		char *key;
-			char *value;
-				struct environment *next;
+	char *key;
+	char *value;
+	struct environment *next;
 } env_t;
 
 /**
- *  * struct variables - variables
- *   * @av: command line arguments
- *    * @buffer: buffer of command
- *     * @env: environment variables
- *      * @count: count of commands entered
- *       * @argv: arguments at opening of shell
- *        */
+ * struct variables - variables
+ * @av: command line arguments
+ * @buffer: buffer of command
+ * @env: environment variables
+ * @count: count of commands entered
+ * @argv: arguments at opening of shell
+ */
 typedef struct variables
 {
-		char **av;
-			char *buffer;
-				env_t **env;
-					size_t count;
-						char **argv;
+	char **av;
+	char *buffer;
+	env_t **env;
+	size_t count;
+	char **argv;
 } vars_t;
 
 /**
- *  * struct builtins - struct for the builtin functions
- *   * @name: name of builtin command
- *    * @f: function for corresponding builtin
- *     */
+ * struct builtins - struct for the builtin functions
+ * @name: name of builtin command
+ * @f: function for corresponding builtin
+ */
 typedef struct builtins
 {
-		char *name;
-			void (*f)(vars_t *);
+	char *name;
+	void (*f)(vars_t *);
 } builtins_t;
 
 char *make_key(char *str);
