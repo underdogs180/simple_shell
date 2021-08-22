@@ -9,7 +9,7 @@
 ssize_t _puts(char *str)
 {
 	ssize_t num, len;
-	
+
 	num = _strlen(str);
 	len = write(STDOUT_FILENO, str, num);
 
@@ -38,7 +38,7 @@ char *_strdup(char *strtodup)
 	for (len = 0; strtodup[len]; len++)
 		;
 	copy = malloc((len + 1) * sizeof(char));
-	
+
 	for (i = 0; i <= len; i++)
 		copy[i] = strtodup[i];
 
@@ -53,16 +53,16 @@ char *_strdup(char *strtodup)
  */
 int _strcmpr(char *strcmp1, char *strcmp2)
 {
-  int i;
+	int i;
 
-  i = 0;
-  while (strcmp1[i] == strcmp2[i])
-    {
-      if (strcmp1[i] == '\0')
-	return (0);
-      i++;
-    }
-  return (strcmp1[i] - strcmp2[i]);
+	i = 0;
+	while (strcmp1[i] == strcmp2[i])
+	{
+		if (strcmp1[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (strcmp1[i] - strcmp2[i]);
 }
 
 /**
@@ -90,7 +90,8 @@ char *_strcat(char *strc1, char *strc2)
 	else
 	{
 		for (len2 = 0; strc2[len2]; len2++)
-			
+			;
+
 	}
 	newlen = len1 + len2 + 2;
 	newstring = malloc(newlen * sizeof(char));
@@ -102,7 +103,7 @@ char *_strcat(char *strc1, char *strc2)
 	for (j = 0; j < len2; j++)
 		newstring[i + 1 + j] = strc2[j];
 	newstring[len1 + len2 + 1] = '\0';
-	
+
 	return (newstring);
 }
 
