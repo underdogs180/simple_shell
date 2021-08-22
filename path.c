@@ -169,3 +169,4 @@ int check_for_dir(char *str)
     }
   return (0);
 }
+
