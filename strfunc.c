@@ -8,16 +8,17 @@
  */
 ssize_t _puts(char *str)
 {
-  ssize_t num, len;
+	ssize_t num, len;
+	
+	num = _strlen(str);
+	len = write(STDOUT_FILENO, str, num);
 
-  num = _strlen(str);
-  len = write(STDOUT_FILENO, str, num);
-  if (len != num)
-    {
-      perror("Fatal Error");
-      return (-1);
-    }
-  return (len);
+	if (len != num)
+	{
+		perror("Fatal Error");
+		return (-1);
+	}
+	return (len);
 }
 
 /**
@@ -27,21 +28,21 @@ ssize_t _puts(char *str)
  */
 char *_strdup(char *strtodup)
 {
-  char *copy;
+	char *copy;
 
-  int len, i;
+	int len, i;
 
-  if (strtodup == 0)
-    return (NULL);
+	if (strtodup == 0)
+		return (NULL);
 
-  for (len = 0; strtodup[len]; len++)
-    ;
-  copy = malloc((len + 1) * sizeof(char));
+	for (len = 0; strtodup[len]; len++)
+		;
+	copy = malloc((len + 1) * sizeof(char));
+	
+	for (i = 0; i <= len; i++)
+		copy[i] = strtodup[i];
 
-  for (i = 0; i <= len; i++)
-    copy[i] = strtodup[i];
-
-  return (copy);
+	return (copy);
 }
 
 /**
@@ -72,36 +73,37 @@ int _strcmpr(char *strcmp1, char *strcmp2)
  */
 char *_strcat(char *strc1, char *strc2)
 {
-  char *newstring;
-  unsigned int len1, len2, newlen, i, j;
+	char *newstring;
+	unsigned int len1, len2, newlen, i, j;
 
-  len1 = 0;
-  len2 = 0;
-  if (strc1 == NULL)
-    len1 = 0;
-  else
-    {
-      for (len1 = 0; strc1[len1]; len1++)
-	;
-    }
-  if (strc2 == NULL)
-    len2 = 0;
-  else
-    {
-      for (len2 = 0; strc2[len2]; len2++)
-	;
-    }
-  newlen = len1 + len2 + 2;
-  newstring = malloc(newlen * sizeof(char));
-  if (newstring == NULL)
-    return (NULL);
-  for (i = 0; i < len1; i++)
-    newstring[i] = strc1[i];
-  newstring[i] = '/';
-  for (j = 0; j < len2; j++)
-    newstring[i + 1 + j] = strc2[j];
-  newstring[len1 + len2 + 1] = '\0';
-  return (newstring);
+	len1 = 0;
+	len2 = 0;
+	if (strc1 == NULL)
+		len1 = 0;
+	else
+	{
+		for (len1 = 0; strc1[len1]; len1++)
+			;
+	}
+	if (strc2 == NULL)
+		len2 = 0;
+	else
+	{
+		for (len2 = 0; strc2[len2]; len2++)
+			
+	}
+	newlen = len1 + len2 + 2;
+	newstring = malloc(newlen * sizeof(char));
+	if (newstring == NULL)
+		return (NULL);
+	for (i = 0; i < len1; i++)
+		newstring[i] = strc1[i];
+	newstring[i] = '/';
+	for (j = 0; j < len2; j++)
+		newstring[i + 1 + j] = strc2[j];
+	newstring[len1 + len2 + 1] = '\0';
+	
+	return (newstring);
 }
 
 /**
@@ -111,11 +113,12 @@ char *_strcat(char *strc1, char *strc2)
  */
 unsigned int _strlen(char *str)
 {
-  unsigned int len;
+	unsigned int len;
 
-  len = 0;
+	len = 0;
 
-  for (len = 0; str[len]; len++)
-    ;
-  return (len);
+	for (len = 0; str[len]; len++)
+		;
+	return (len);
 }
+

@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- *  * make_env - make the shell environment from the environment passed to main
- *   * @env: environment passed to main
- *    *
- *     * Return: pointer to the new environment
+ * make_env - make the shell environment from the environment passed to main
+ * @env: environment passed to main
+ *
+ * Return: pointer to the new environment
  */
 char **make_env(char **env)
 {
