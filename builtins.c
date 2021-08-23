@@ -8,7 +8,6 @@
 void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 {
 	unsigned int i;
-
 	builtins_t check[] = {
 		{"exit", new_exit},
 		{"env", _env},
@@ -28,6 +27,7 @@ void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 	return (check[i].f);
 }
 
+
 /**
  * new_exit - exit program
  * @vars: variables
@@ -46,12 +46,15 @@ void new_exit(vars_t *vars)
 			print_error(vars, ": Illegal number: ");
 			_puts2(vars->av[1]);
 			_puts2("\n");
+			free(vars->commands);
+			vars->commands = NULL;
 			return;
 		}
 		vars->status = status;
 	}
 	free(vars->buffer);
 	free(vars->av);
+	free(vars->commands);
 	free_env(vars->env);
 	exit(vars->status);
 }
@@ -83,7 +86,6 @@ void _env(vars_t *vars)
 void new_setenv(vars_t *vars)
 {
 	char **key;
-
 	char *var;
 
 
@@ -98,14 +100,22 @@ void new_setenv(vars_t *vars)
 		add_key(vars);
 	else
 	{
-		var = add_value(vars);
+		var = add_value(vars->av[1], vars->av[2]);
 		if (var == NULL)
+		{
+			print_error(vars, NULL);
+			free(vars->buffer);
+			free(vars->commands);
+			free(vars->av);
+			free_env(vars->env);
 			exit(127);
+		}
 		free(*key);
 		*key = var;
 	}
 	vars->status = 0;
 }
+
 
 /**
  * new_unsetenv - remove an environment variable
@@ -116,6 +126,7 @@ void new_setenv(vars_t *vars)
 void new_unsetenv(vars_t *vars)
 {
 	char **key, **newenv;
+
 
 	unsigned int i, j;
 
