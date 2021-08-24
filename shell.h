@@ -1,5 +1,5 @@
-#ifndef _SHELL_H_
-#define _SHELL_H_
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,21 +8,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <limits.h>
+#include <signal.h>
 
-extern char **environ;
-
-/**
- *  * struct environment - struct for a linked list of environment variables
- *   * @key: key name for variable
- *    * @value: value of variable
- *     * @next: pointer to next variable
- */
-typedef struct environment
-{
-	char *key;
-	char *value;
-	struct environment *next;
-} env_t;
 
 /**
  * struct variables - variables
@@ -31,14 +19,18 @@ typedef struct environment
  * @env: environment variables
  * @count: count of commands entered
  * @argv: arguments at opening of shell
+ * @status: exit status
  */
 typedef struct variables
 {
 	char **av;
 	char *buffer;
-	env_t **env;
+	char **env;
 	size_t count;
 	char **argv;
+	int status;
+	char **commands;
+
 } vars_t;
 
 /**
@@ -52,11 +44,8 @@ typedef struct builtins
 	void (*f)(vars_t *);
 } builtins_t;
 
-char *make_key(char *str);
-char *make_value(char *str);
-env_t *add_env_node_end(env_t **head, char *key, char *value);
-env_t *make_env(char **environment);
-void free_env(env_t **head);
+char **make_env(char **env);
+void free_env(char **env);
 
 ssize_t _puts(char *str);
 char *_strdup(char *strtodup);
@@ -66,17 +55,27 @@ unsigned int _strlen(char *str);
 
 char **tokenize(char *buffer, char *delimiter);
 char **_realloc(char **ptr, size_t *size);
+char *new_strtok(char *str, const char *delim);
 
 void (*check_for_builtins(vars_t *vars))(vars_t *vars);
 void new_exit(vars_t *vars);
 void _env(vars_t *vars);
 void new_setenv(vars_t *vars);
 void new_unsetenv(vars_t *vars);
-void change_env_value(char *val, env_t *node);
+
+void add_key(vars_t *vars);
+char **find_key(char **env, char *key);
+char *add_value(char *key, char *value);
+int _atoi(char *str);
 
 void check_for_path(vars_t *vars);
 int path_execute(char *command, vars_t *vars);
-env_t *find_path(env_t *head);
+char *find_path(char **env);
 int execute_cwd(vars_t *vars);
+int check_for_dir(char *str);
+
+void print_error(vars_t *vars, char *msg);
+void _puts2(char *str);
+char *_uitoa(unsigned int count);
 
 #endif /* _SHELL_H_ */
