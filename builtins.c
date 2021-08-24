@@ -8,6 +8,7 @@
 void (*check_for_builtins(vars_t *vars))(vars_t *vars)
 {
 	unsigned int i;
+
 	builtins_t check[] = {
 		{"exit", new_exit},
 		{"env", _env},
@@ -37,6 +38,7 @@ void new_exit(vars_t *vars)
 {
 	int status;
 
+
 	if (_strcmpr(vars->av[0], "exit") == 0 && vars->av[1] != NULL)
 	{
 		status = _atoi(vars->av[1]);
@@ -59,6 +61,7 @@ void new_exit(vars_t *vars)
 	exit(vars->status);
 }
 
+
 /**
  * _env - prints the current environment
  * @vars: struct of variables
@@ -76,6 +79,8 @@ void _env(vars_t *vars)
 	}
 	vars->status = 0;
 }
+
+
 
 /**
  * new_setenv - create a new environment variable, or edit an existing variable
@@ -117,6 +122,7 @@ void new_setenv(vars_t *vars)
 }
 
 
+
 /**
  * new_unsetenv - remove an environment variable
  * @vars: pointer to a struct of variables
@@ -135,6 +141,7 @@ void new_unsetenv(vars_t *vars)
 	{
 		print_error(vars, ": Incorrect number of arguments\n");
 		vars->status = 2;
+
 		return;
 	}
 	key = find_key(vars->env, vars->av[1]);
